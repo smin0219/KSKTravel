@@ -125,7 +125,7 @@ public class UserAddServlet extends HttpServlet {
 				stmt1.executeUpdate("insert into Person values('" + Id + "','" + FirstName + "','" + LastName + "','"
 						+ Address + "','" + City + "','" + State + "','" + Zip + "')");
 				
-				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + 0 + "','" + dateFormat.format(date) + "','" + Rate + "')");
+				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + 1 + "','" + dateFormat.format(date) + "','" + Rate + "')");
 				
 				stmt1.close();
 			}
