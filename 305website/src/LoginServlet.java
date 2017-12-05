@@ -100,17 +100,16 @@ public class LoginServlet extends HttpServlet {
         			java.sql.Statement stmt1=conn.createStatement();
         			java.sql.ResultSet rs = stmt1.executeQuery("select AccountNo from Customer where Id='" + username + "'");
         			rs.next();
-        			String accountNo = rs.getString(1);
         			// java.sql.ResultSet rs = stmt1.executeQuery(" select * from Student where Id='"+username+"' and Pswd='"+userpasswd+"'");
         			rs = stmt1.executeQuery(" select * from Customer where Id='"+username+"' and Pswd='"+userpasswd+"'");
-					if (rs.next())
+				if (rs.next())
 					{
 						// login success
 						session.putValue("login",username);
 //						response.sendRedirect("studentinfo");
 						session.putValue("accountno", rs.getString("AccountNo"));
 //						response.sendRedirect("/StudentInfoServlet");
-						
+	        				String accountNo = rs.getString(1);
 						
 						System.out.println("RequestDispatcher rd= context.getRequestDispatcher;");
 						
