@@ -11,10 +11,10 @@
 <strong><span style="font-size: 14pt">KSK Travel</span></strong>
 <div class="topnav" id="myTopnav">
   <a class="active" href="CustomerMain.jsp">Home</a>
-  <a href="CustomerReserve.html">Make a Reservation</a>
-  <a href="CustomerAuctions.jsp">Auctions</a>
+  <a href="CustomerReserve.jsp">Make a Reservation</a>
+  <!-- <a href="CustomerAuctions.jsp">Auctions</a> -->
   <a href="CustomerHistory.jsp">History</a>
-  <a href="CustomerRecommendations.jsp">Recommendations</a>
+  <a href="${pageContext.request.contextPath}/recommendations">Recommendations</a>
 </div>
 <br />
 
@@ -37,6 +37,8 @@
 	        <span style="font-size: 10pt">Meal</span></td>
 	    <td style="width: 187px">
 	        <span style="font-size: 10pt">Departure Time</span></td>
+	    <td style="width: 84px">
+	        <span style="font-size: 10pt">Trip Type</span></td>
 	</tr>
 	
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -59,6 +61,8 @@
 	            <span style="font-size: 10pt">${res.meal}</span></td>
 	        <td style="width: 7px">
 	            <span style="font-size: 10pt">${res.deptime}</span></td>
+	        <td style="width: 84px">
+	            <span style="font-size: 10pt">${res.type}</span></td>
 		</tr>
 	</c:forEach>
 </table>

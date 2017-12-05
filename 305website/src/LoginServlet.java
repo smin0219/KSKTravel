@@ -108,7 +108,7 @@ public class LoginServlet extends HttpServlet {
 						// login success
 						session.putValue("login",username);
 //						response.sendRedirect("studentinfo");
-						
+						session.putValue("accountno", rs.getString("AccountNo"));
 //						response.sendRedirect("/StudentInfoServlet");
 						
 						
@@ -132,13 +132,14 @@ public class LoginServlet extends HttpServlet {
 //							res.setFlightnum(rs.getString("i.FlightNo"));
 //							res.setSeat(rs.getString("rp.SeatNo"));
 //							res.setMeal(rs.getString("rp.Meal"));
-							res.setNumber(rs.getString(1));
+							res.setNumber(rs.getString(8));
 							res.setDate(rs.getString(2));
-							res.setFlightnum(rs.getString(9));
-							res.setSeat(rs.getString(15));
-							res.setMeal(rs.getString(17));
+							res.setType(rs.getString(7));
+							res.setFlightnum(rs.getString(10));
+							res.setSeat(rs.getString(16));
+							res.setMeal(rs.getString(18));
 							
-							String airline = rs.getString(8);
+							String airline = rs.getString(9);
 							
 							java.sql.Statement stmt2=conn.createStatement();
 							java.sql.ResultSet rs2 = stmt2.executeQuery(" select a.Name, l.DepTime from Airport a, Leg l where l.AirlineID = '" + airline + "' and l.FlightNo = '" + res.getFlightnum() + "' and l.DepAirportID = a.Id");
@@ -151,7 +152,7 @@ public class LoginServlet extends HttpServlet {
 							if (rs2.next())
 								res.setDestination(rs2.getString(1));
 							
-							rs2 = stmt2.executeQuery("select DepTime from Leg where AirlineID='" + airline + "' and FlightNo='" + rs.getString(9) + "' and LegNo='" + rs.getString(10) + "'");
+							rs2 = stmt2.executeQuery("select DepTime from Leg where AirlineID='" + airline + "' and FlightNo='" + rs.getString(10) + "' and LegNo='" + rs.getString(11) + "'");
 							rs2.next();
 							res.setDeptime(rs2.getString(1));
 							
