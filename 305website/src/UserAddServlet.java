@@ -110,7 +110,7 @@ public class UserAddServlet extends HttpServlet {
 					maxAccountNo = 1;
 				}
 				
-				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + maxAccountNo + "','" + dateFormat.format(date) + "','" + Rate + "')");
+				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + maxAccountNo + "','" + dateFormat.format(date) + "','" + Rate + ',' + Password1 + "')");
 
 				System.out.println("Id:		" + Id);
 
@@ -120,12 +120,13 @@ public class UserAddServlet extends HttpServlet {
 			} else {
 				// Manager
 				System.out.println("ADD MANAGER");
+				System.out.println("Correct Servlet");
 				System.out.println("target: " + request.getParameter("target"));
 				
 				stmt1.executeUpdate("insert into Person values('" + Id + "','" + FirstName + "','" + LastName + "','"
 						+ Address + "','" + City + "','" + State + "','" + Zip + "')");
 				
-				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + 1 + "','" + dateFormat.format(date) + "','" + Rate + "')");
+				stmt1.executeUpdate("insert into Employee values('" + Id + "','" + SSN + "','" + 1 + "','" + dateFormat.format(date) + "','" + Rate + ',' + Password1 +"')");
 				
 				stmt1.close();
 			}
