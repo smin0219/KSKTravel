@@ -53,6 +53,8 @@ public class AddReservationServlet extends HttpServlet {
 		String depDate = request.getParameter("depdate");
 		String airlineID = request.getParameter("airline");
 		String meal = request.getParameter("meal");
+		String type = request.getParameter("type");
+		String retDate = request.getParameter("retdate");
 		
 		String mysJDBCDriver = "com.mysql.jdbc.Driver";
 
@@ -111,6 +113,9 @@ public class AddReservationServlet extends HttpServlet {
 				
 				legs.add(leg);
 			}
+			
+			request.setAttribute("retdate", retDate);
+			request.setAttribute("type", type);
 			
 			session.setAttribute("leglist", legs);
 			

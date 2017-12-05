@@ -14,7 +14,7 @@
   <a href="CustomerReserve.html">Make a Reservation</a>
   <a href="CustomerAuctions.jsp">Auctions</a>
   <a href="CustomerHistory.jsp">History</a>
-  <a href="CustomerRecommendations.jsp">Recommendations</a>
+  <a href="${pageContext.request.contextPath}/recommendations">Recommendations</a>
 </div>
 <br />
 
@@ -62,6 +62,8 @@
 	        		<input type="hidden" name="legNo" value="${leg.legNo}" />
 	        		<input type="hidden" name="arrTime" value="${leg.arrTime}" />
 	        		<input type="hidden" name="meal" value="${leg.meal}" />
+	        		<input type="hidden" name="type" value="${type}" />
+	        		<input type="hidden" name="retDate" value="${retdate}" />
 			    	<input id="Button2" type="submit" value="Select" />
 				</form>
 	        </td>

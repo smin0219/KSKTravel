@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 /**
  * Servlet implementation class SubmitReservation
  */
@@ -57,6 +59,8 @@ public class SubmitReservation extends HttpServlet {
 		String legNo = request.getParameter("legNo");
 		String arrTime = request.getParameter("arrTime");
 		String meal = request.getParameter("meal");
+		String retDate = request.getParameter("retDate");
+		String type = request.getParameter("type");
 		
 		System.out.println("depAirport param: " + depAirport);
 		
@@ -92,13 +96,22 @@ public class SubmitReservation extends HttpServlet {
 				maxResrNo = 1;
 			}
 			
+			String tType;
+			
+			if(type.charAt(0) == '1')
+				tType = "One-Way";
+			else if(type.charAt(0) == '2')
+				tType = "Round-Trip";
+			else
+				tType = "Multi-City";
+			
 			double bookingFee = Double.parseDouble(fare) * 0.1;
 			double totalFare = Double.parseDouble(fare) + bookingFee;
 			String username = (String) session.getAttribute("login");
 			rs = stmt1.executeQuery("select AccountNo from Customer where Id='" + username + "'");
 			rs.next();
 			String accountNo = rs.getString(1);
-			stmt1.executeUpdate("insert into Reservation values('" + maxResrNo + "','" + dateFormat.format(date) + "','" + bookingFee + "','" + totalFare + "', null, '" + rs.getString(1) + "')");
+			stmt1.executeUpdate("insert into Reservation values('" + maxResrNo + "','" + dateFormat.format(date) + "','" + bookingFee + "','" + totalFare + "', null, '" + rs.getString(1) + "','" + tType + "')");
 			
 			rs = stmt1.executeQuery("select Id from Airline where Name='" + airline + "'");
 			rs.next();
@@ -135,10 +148,13 @@ public class SubmitReservation extends HttpServlet {
 				letter = "E";
 			else
 				letter = "F";
-			
 			String seat = seatNum + letter;
 			
-			stmt1.executeUpdate("insert into Passenger values ('" + username + "','" + accountNo + "')");
+			try {
+				stmt1.executeUpdate("insert into Passenger values ('" + username + "','" + accountNo + "')");
+			} catch(MySQLIntegrityConstraintViolationException e) {
+				
+			}
 			
 			stmt1.executeUpdate("insert into ReservationPassenger values ('" + maxResrNo + "','" + username + "','" + accountNo + "','" + seat + "', 'Economy','" + meal + "')");
 			
@@ -151,8 +167,51 @@ public class SubmitReservation extends HttpServlet {
 			res.setFlightnum(flightNo);
 			res.setMeal(meal);
 			res.setSeat(seat);
-			res.setType("One-Way");
+			res.setType(tType);
+//			if(type.charAt(0) == '1')
+//				res.setType("One-Way");
+//			else if(type.charAt(0) == '2')
+//				res.setType("Round-Trip");
+//			else
+//				res.setType("Multi-City");
+			System.out.println("type: " + type);
+			
 			reslist.add(res);
+			
+			if(type.charAt(0) == '2') {
+				
+				// stmt1.executeUpdate("insert into Includes values('" + maxResrNo + "','" + airlineID + "','" + flightNo + "','" + legNo + "','" + dateFormat.format(date) + "')");
+				
+//				Reservation res2 = new Reservation();
+//				res.setNumber(maxResrNo + "");
+//				res.setDate(dateFormat.format(date));
+//				res.setDeparting(arrAirport);
+//				res.setDeptime(retDate);
+//				res.setDestination(depAirport);
+//				res.setFlightnum(flightNo);
+//				res.setMeal(meal);
+//				res.setType("Round-Trip");
+//				
+//				seatNum = rand.nextInt((int) Math.floor(noOfSeats / 3)) + 1;
+//				part2 = rand.nextInt(6) + 1;
+//				if(part2 == 1)
+//					letter = "A";
+//				else if (part2 == 2)
+//					letter = "B";
+//				else if (part2 == 3)
+//					letter = "C";
+//				else if (part2 == 4)
+//					letter = "D";
+//				else if (part2 == 5)
+//					letter = "E";
+//				else
+//					letter = "F";
+//				seat = seatNum + letter;
+//				res.setSeat(seat);
+//				
+//				reslist.add(res2);
+			}
+			
 			session.setAttribute("reslist", reslist);
 			
 			stmt1.close();

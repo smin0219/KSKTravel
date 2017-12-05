@@ -11,10 +11,10 @@
 <strong><span style="font-size: 14pt">KSK Travel</span></strong>
 <div class="topnav" id="myTopnav">
   <a href="CustomerMain.jsp">Home</a>
-  <a href="CustomerReserve.html">Make a Reservation</a>
+  <a href="CustomerReserve.jsp">Make a Reservation</a>
   <a class="active" href="CustomerAuctions.jsp">Auctions</a>
   <a href="CustomerHistory.jsp">History</a>
-  <a href="CustomerRecommendations.jsp">Recommendations</a>
+  <a href="${pageContext.request.contextPath}/recommendations">Recommendations</a>
 </div>
 
 <br />
