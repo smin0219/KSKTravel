@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="NavBar.css">
+<title>KSK Travel -- Summary Listings of Revenue</title>
+</head>
+<body style="font-size: 12pt; text-align: left" bgcolor="#add8e6">
+<strong><span style="font-size: 14pt">KSK Travel - Manager</span></strong>
+<div class="topnav" id="myTopnav">
+  <a href="CustomerMain.jsp">Home</a>
+  <a class="active" href="CustomerReserve.html">Summary Listings of Revenue</a>
+  <a href="CustomerAuctions.jsp">Employees</a>
+  <a href="CustomerHistory.jsp">Flights</a>
+  <a href="CustomerReccomendations.jsp">Customers</a>
+</div>
+<br/>
+<div class="container">
+<form name="myForm" action="sumlistrevchoice" method="post">
+<div>
+<label for="choice">Choice of Interest: </label>
+<select name="choice">
+  <option value="01">Flight</option>
+  <option value="02">Destination City</option>
+  <option value="03">Customer</option>
+</select>
+</div>
+<br />
+<input id="Button2" type="submit" value="Submit" />
+</form>
+</div>
+<br />
+<!-- <input id="Button2" type="button" value="Logout" onclick="window.open('index.html','_self');" /><br />  -->
+</body>
+</html>
